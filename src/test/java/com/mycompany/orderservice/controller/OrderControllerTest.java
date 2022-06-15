@@ -44,5 +44,22 @@ public class OrderControllerTest {
 
 
     }
+    @Test
+    @DisplayName("scenario for Get order")
+    void getAllOrdersTest()
+    {
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        OrderDTO orderDTO=new OrderDTO();
+        orderDTO.setId(3L);
+        Long userId=1L;
+        orderDTOList.add(orderDTO);
+
+        Mockito.when(orderService.getAllOrders(userId)).thenReturn(orderDTOList);
+        ResponseEntity<List<OrderDTO>> responseEntity=orderController.getAllOrders(userId);
+        Assertions.assertEquals(1L,responseEntity.getBody().size());
+        Assertions.assertEquals(HttpStatus.OK.value(),responseEntity.getStatusCodeValue());
+
+    }
+
 
 }
